@@ -75,22 +75,19 @@ task :watch do
 	puts "Watching source files for changes..."
 
 	paths = ['src/assets/sass', 'src/assets/js', 'src/templates']
-	options = { :latency => 1.5, :no_defer => true }
+	options = { :latency => 0.75, :no_defer => true }
 
 	fsevent = FSEvent.new
 	fsevent.watch paths, options do |directories|
 		puts "Detected change inside: #{directories.inspect}"
-		dir = directories.inspect.to_s.sub(/#{Dir.pwd}/, '')
+		dir = directories.inspect.to_s
 
-		if dir.include? 'assets/sass'
-			puts "1"
-			Rake::Task['compile_css'].invoke
-		elsif dir.include? 'assets/js'
-			puts "2"
-			Rake::Task['compile_js'].invoke
-		elsif dir.include? 'templates'
-			puts "3"
-			Rake::Task['compile_html'].invoke
+		if dir.include? 'src/assets/sass'
+			Rake::Task['compile_css'].execute
+		elsif dir.include? 'src/assets/js'
+			Rake::Task['compile_js'].execute
+		elsif dir.include? 'src/templates'
+			Rake::Task['compile_html'].execute
 		end
 	end
 

@@ -6,6 +6,7 @@
 
 # build output dir
 dist/**/*
+.dist_tmp
 
 # sass libs
 src/assets/sass/libs/bourbon

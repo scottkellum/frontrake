@@ -6,3 +6,7 @@
 
 # build output dir
 dist/**/*
+
+# sass libs
+src/assets/sass/libs/bourbon
+src/assets/sass/libs/neat

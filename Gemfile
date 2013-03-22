@@ -29,4 +29,5 @@ gem 'yajl-ruby'
 
 # watcher/server
 gem 'rb-fsevent'
+gem 'guard-livereload'
 gem 'serve'

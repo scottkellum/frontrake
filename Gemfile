@@ -21,7 +21,7 @@ gem 'coffee-script'
 # optimizers
 gem 'smusher'
 gem 'reduce'
-gem 'sprockets'
+#gem 'sprockets'
 
 # builder
 gem 'stasis'

@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html class="no-js" lang="en" xml:lang="en">
+<%
+
+  # Variables
+  ###################################
+
+  site_title = "frontrake"
+  site_lang = "en"
+
+  base_domain = "frontrake.dev"
+
+
+%><!DOCTYPE html>
+<html class="no-js" lang="<%= site_lang %>" xml:lang="<%= site_lang %>">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>framerake</title>
-<base href="http://du-framerake.dev/">
-<link href="//framerake.dev" rel="canonical">
-<link href="//assets.framerake" rel="dns-prefetch">
+<title><%= site_title %></title>
+<base href="http://<%= base_domain %>/">
+<link href="//<%= base_domain %>" rel="canonical">
+<link href="//assets.<%= base_domain %>" rel="dns-prefetch">
 <!-- CSS -->
 <link href="/assets/css/main.css" rel="stylesheet">
 <!-- CSS -->
@@ -23,9 +34,9 @@ conditionizr({
   scriptSrc: 'assets/js/conditionizr/',
   styleSrc: 'assets/css/conditionizr/',
   ieLessThan: {
-    active: true,
-    version: '9',
-    styles: true
+	active: true,
+	version: '9',
+	styles: true
   },
   chrome: { classes: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
   safari: { classes: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },

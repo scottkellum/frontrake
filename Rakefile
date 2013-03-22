@@ -1,7 +1,4 @@
 require 'rb-fsevent'
-require 'webrick'
-
-include WEBrick
 
 ################################################################################################
 # PUBLIC TASKS

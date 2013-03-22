@@ -11,7 +11,7 @@ include WEBrick
 # installs the gems and initialized the project
 desc "installs the gems and initialized the project"
 task :install do
-	%x{ sudo bundle install }
+	%x{ bundle install }
 	puts "Installed required gems..."
 	Rake::Task['init'].invoke
 end

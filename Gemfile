@@ -26,3 +26,6 @@ gem 'sprockets'
 # builder
 gem 'stasis'
 gem 'yajl-ruby'
+
+# watcher
+gem 'rb-fsevent'

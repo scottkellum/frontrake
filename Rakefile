@@ -27,10 +27,10 @@ task :update do
 end
 
 # REMOVE
-# removes the dist directory
-desc "removes the dist directory"
+# removes all non-source files
+desc "removes all non-source files"
 task :remove do
-	%x{ rm -rf dist .dist_tmp }
+	%x{ rm -rf dist .dist_tmp .sass-cache }
 end
 
 # COMPILE
@@ -61,7 +61,7 @@ task :build do
 	Rake::Task['clean'].invoke
 end
 
-desc "watches the source for changes"
+desc "watches for changes and fires compile()"
 task :watch do
 	paths = ['src']
 	options = {:latency => 0.75, :no_defer => true }

@@ -17,7 +17,6 @@ gem 'haml'
 
 # js compiling
 gem 'coffee-script'
-gem 'javascript'
 
 # optimizers
 gem 'smusher'

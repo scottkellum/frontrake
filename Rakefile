@@ -1,3 +1,5 @@
+require 'rb-fsevent'
+
 ################################################################################################
 # PUBLIC TASKS
 ################################################################################################
@@ -59,9 +61,27 @@ task :build do
 	Rake::Task['clean'].invoke
 end
 
-# desc "watches the source for changes"
-# task :watch do
-# end
+desc "watches the source for changes"
+task :watch do
+	paths = ['src']
+	options = {:latency => 0.75, :no_defer => true }
+
+	fsevent = FSEvent.new
+	fsevent.watch paths, options do |directories|
+		puts "Detected change inside: #{directories.inspect}"
+
+		dir = directories.inspect.to_s.sub(/#{Dir.pwd}/, '')
+		if dir == "/src/assets/sass"
+			Rake::Task['compile_css'].invoke
+		elsif dir == "/src/assets/js"
+			Rake::Task['compile_js'].invoke
+		elsif dir == "/src/templates"
+			Rake::Task['compile_html'].invoke
+		end
+	end
+
+	fsevent.run
+end
 
 # desc "watches for changes and runs a local server"
 # task :server do

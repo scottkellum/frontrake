@@ -20,7 +20,9 @@ gem 'coffee-script'
 
 # optimizers
 gem 'smusher'
+gem 'reduce'
 gem 'sprockets'
 
-# builders
-gem 'serve'
+# builder
+gem 'stasis'
+gem 'yajl-ruby'

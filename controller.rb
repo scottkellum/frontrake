@@ -1,0 +1,2 @@
+ignore /\/*.md/
+ignore /\/*.sass/

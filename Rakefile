@@ -45,6 +45,7 @@ end
 desc "optimizes static asset files"
 task :optimize do
 	Rake::Task['optimize_img'].invoke
+	Rake::Task['optimize_js'].invoke
 end
 
 # BUILD
@@ -74,7 +75,7 @@ end
 # CLEAN
 # cleans the dist directory
 task :clean do
-	%x{ rm -rf dist/.git dist/.sass-cache dist/assets/sass dist/templates }
+	%x{ rm -rf dist/.git dist/.sass-cache dist/assets/sass dist/templates .dist_tmp }
 end
 
 # CREATE
@@ -96,16 +97,19 @@ end
 # COMPILE-HTML
 # compiles HAML to HTML
 task :compile_html do
-	FileList['src/templates/**/*.html.haml'].exclude('src/templates/partials/**/*').each do |file|
+	%x{ stasis -p .dist_tmp -o src/assets/js,src/templates }
+	FileList['.dist_tmp/src/templates/**/*.html'].exclude('.dist_tmp/src/templates/partials/**/_*.html').each do |file|
 		src = file
-		out = file.sub(/src\/templates/, 'dist')
-		out = out.sub(/html.haml/, 'html')
+		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
+		%x{ cp #{src} #{out} }
 	end
 end
 
 # COMPILE-JS
 # compiles coffee-script to JS
 task :compile_js do
+	%x{ stasis -p .dist_tmp -o src/assets/js,src/templates }
+	%x{ rm -rf dist/assets/js && cp -R .dist_tmp/src/assets/js dist/assets/ }
 end
 
 
@@ -116,4 +120,12 @@ end
 # shrinks image files
 task :optimize_img do
 	%x{ smusher dist/img }
+end
+
+# OPTIMIZE-JS
+# minifies JS files
+task :optimize_js do
+	FileList['dist/assets/js/**/*.js'].exclude('dist/assets/js/**/*.min.js').each do |file|
+		%x{ reduce -o #{file} }
+	end
 end

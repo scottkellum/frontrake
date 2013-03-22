@@ -34,6 +34,7 @@ end
 
 desc "builds the project files"
 task :build do
+	%x{ smusher dist/img }
 end
 
 

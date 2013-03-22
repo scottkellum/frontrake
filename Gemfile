@@ -23,5 +23,7 @@ gem 'smusher'
 gem 'sprockets'
 
 # builders
-gem 'tilt'
 gem 'stasis'
+
+# stasis dependencies
+gem 'tilt'

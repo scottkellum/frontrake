@@ -12,9 +12,6 @@ gem 'sass-globbing'
 gem 'bourbon'
 gem 'neat'
 
-# html compiling
-gem 'haml'
-
 # js compiling
 gem 'coffee-script'
 

@@ -11,7 +11,7 @@ include WEBrick
 # installs the gems and initialized the project
 desc "installs the gems and initialized the project"
 task :install do
-	%x{ sudo bundle install }
+	%x{ bundle install }
 	puts "Installed required gems..."
 	Rake::Task['init'].invoke
 end
@@ -99,6 +99,20 @@ end
 desc "runs a local webserver and watches for changes"
 multitask :server => [ :serve, :watch, :guard ]
 
+# PACK
+# packages the current build
+desc "packages the current build"
+task :pack do
+	date = Time.now
+	date = date.strftime("%Y-%m-%d_%H-%M")
+
+	if File.directory? 'dist'
+		%x{ tar -zcf packs/#{date}.tar.gz dist }
+	else
+		puts "Not created. Dist directory doesn't exist..."
+	end
+end
+
 
 ################################################################################################
 # PRIVATE TASKS
@@ -158,7 +172,7 @@ task :compile_html do
 		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
 		%x{ cp -f #{src} #{out} }
 	end
-	puts "Compiled HAML to HTML..."
+	puts "Compiled ERB to HTML..."
 end
 
 # COMPILE-JS

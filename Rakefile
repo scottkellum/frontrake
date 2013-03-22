@@ -97,7 +97,7 @@ end
 # SERVER
 # runs a local webserver and watches for changes
 desc "runs a local webserver and watches for changes"
-multitask :server => [ :serve, :watch ]
+multitask :server => [ :serve, :watch, :guard ]
 
 
 ################################################################################################
@@ -122,7 +122,20 @@ end
 # starts the serve server
 task :serve do
 	Rake::Task['build'].invoke
+	puts "Starting Serve web server..."
+	puts "\n"
+	puts "####################################################"
+	puts "  Serve can be access via: http://127.0.0.1:8000"
+	puts "####################################################"
+	puts "\n"
 	%x{ serve 8000 dist }
+end
+
+# GUARD
+# starts Guards (LiveReload)
+task :guard do
+	puts "Starting Guard LiveReload...."
+	%x{ guard start --no-bundler-warning }
 end
 
 

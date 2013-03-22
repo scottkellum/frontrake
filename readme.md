@@ -53,6 +53,7 @@ To get a list of all available tasks, run `rake -T`:
     rake init      # initalizes the 3rd-party libraries
     rake install   # installs the gems and initialized the project
     rake optimize  # optimizes static asset files
+    rake pack      # packages the current build
     rake remove    # removes all non-source files
     rake server    # runs a local webserver and watches for changes
     rake update    # updates the 3rd-party libraries

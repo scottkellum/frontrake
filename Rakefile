@@ -99,6 +99,20 @@ end
 desc "runs a local webserver and watches for changes"
 multitask :server => [ :serve, :watch, :guard ]
 
+# PACK
+# packages the current build
+desc "packages the current build"
+task :pack do
+	date = Time.now
+	date = date.strftime("%Y-%m-%d_%H-%M")
+
+	if File.directory? 'dist'
+		%x{ tar -zcf packs/#{date}.tar.gz dist }
+	else
+		puts "Not created. Dist directory doesn't exist..."
+	end
+end
+
 
 ################################################################################################
 # PRIVATE TASKS

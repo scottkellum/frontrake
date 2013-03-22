@@ -8,6 +8,9 @@
 dist/**/*
 .dist_tmp
 
+# backup/package dir
+packs/**/*
+
 # sass libs
 src/assets/sass/libs/bourbon
 src/assets/sass/libs/neat

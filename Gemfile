@@ -27,5 +27,6 @@ gem 'sprockets'
 gem 'stasis'
 gem 'yajl-ruby'
 
-# watcher
+# watcher/server
 gem 'rb-fsevent'
+gem 'serve'

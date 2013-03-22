@@ -1,0 +1,23 @@
+/**
+ * LABELS
+ * styling for the <label> element
+ */
+
+/* PLACEHOLDER-LABEL
+ * cross-browser placeholder like labels
+ * usg: .placeholder-label > .placeholder + input|textarea
+ */
+.placeholder-label
+	position: relative
+	.placeholder
+		left: $input-padding
+		position: absolute
+		z-index: 2
+	.placeholder-right
+		right: $input-padding
+		left: auto
+	input,
+	textarea
+		position: relative
+		&:focus
+			z-index: 3

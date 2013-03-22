@@ -1,0 +1,8 @@
+# ignore lock files
+*.lock
+
+# sass/compass cache
+**/.sass-cache
+
+# build output dir
+dist/**/*

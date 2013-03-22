@@ -21,7 +21,7 @@ gem 'coffee-script'
 # optimizers
 gem 'smusher'
 gem 'reduce'
-gem 'sprockets'
+#gem 'sprockets'
 
 # builder
 gem 'stasis'
@@ -29,4 +29,5 @@ gem 'yajl-ruby'
 
 # watcher/server
 gem 'rb-fsevent'
+gem 'guard-livereload'
 gem 'serve'

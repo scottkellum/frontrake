@@ -30,7 +30,7 @@ end
 # removes the dist directory
 desc "removes the dist directory"
 task :remove do
-	%x{ rm -rf dist }
+	%x{ rm -rf dist .dist_tmp }
 end
 
 # COMPILE
@@ -95,7 +95,7 @@ end
 # CLEAN
 # cleans the dist directory
 task :clean do
-	%x{ rm -rf dist/.git dist/.sass-cache dist/assets/sass dist/templates .dist_tmp }
+	%x{ rm -rf dist/.git dist/.sass-cache dist/assets/sass dist/templates }
 end
 
 # CREATE

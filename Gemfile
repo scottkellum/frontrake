@@ -17,13 +17,11 @@ gem 'haml'
 
 # js compiling
 gem 'coffee-script'
+gem 'javascript'
 
 # optimizers
 gem 'smusher'
 gem 'sprockets'
 
 # builders
-gem 'stasis'
-
-# stasis dependencies
-gem 'tilt'
+gem 'serve'

@@ -1,0 +1,73 @@
+/**
+ * BOURBON
+ * A simple and lightweight mixin library for Sass
+ */
+@import "libs/bourbon/bourbon"
+
+
+/**
+ * NEAT
+ * Neat is an open source semantic grid framework built on top of Sass and Bourbon
+ */
+@import "libs/neat/neat-helpers"
+
+/* Settings
+ * custom neat configuration
+ */
+$column: 60px
+$gutter: 20px
+$grid-columns: 12
+$max-width: 1200px
+$outer-padding: 20px
+
+// media-query breakpoints for rspv design
+$mobile: new-breakpoint(max-width 767px)
+$tablet: new-breakpoint(min-width 768px max-width 979px)
+
+// generate the magic grid
+@import "libs/neat/neat"
+
+
+/**
+ * VARIABLES
+ * frontsass framework variables
+ */
+
+/* GLOBALS
+ * basic global styling */
+$font-size: 14px
+$line-height: golden-ratio($font-size, 1)
+
+/* SPACING
+ * */
+$margin-bottom: 20px
+$list-padding: 15px
+
+/* COLORS
+ * color variables */
+$color-scheme: darken // lighten|darken
+$bg-color: #fff
+
+$primary: #333
+$secondary: #666
+
+$link-color: #444
+$link-hover: #555
+
+/* FORMS
+ * form element variables */
+$input-padding: 8px
+
+
+/**
+ * FUNCTIONS
+ * Instead of outputting lines of Sass the way mixins do, functions return a value
+ */
+//@import "functions/**/*"
+
+
+/**
+ * MIXINS
+ * Mixins are the Sass equivalent of macros in other programming languages
+ */
+//@import "mixins/**/*"

@@ -1,0 +1,13 @@
+# ignore lock files
+*.lock
+
+# sass/compass cache
+**/.sass-cache
+
+# build output dir
+dist/**/*
+.dist_tmp
+
+# sass libs
+src/assets/sass/libs/bourbon
+src/assets/sass/libs/neat

@@ -2,7 +2,8 @@
 *.lock
 
 # sass/compass cache
-**/.sass-cache
+*.sass-cache
+**/*.sass-cache
 
 # build output dir
 dist/**/*

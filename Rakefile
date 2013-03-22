@@ -158,7 +158,7 @@ task :compile_html do
 		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
 		%x{ cp -f #{src} #{out} }
 	end
-	puts "Compiled HAML to HTML..."
+	puts "Compiled ERB to HTML..."
 end
 
 # COMPILE-JS

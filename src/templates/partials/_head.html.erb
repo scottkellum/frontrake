@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xml:lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>framerake</title>
+<base href="http://du-framerake.dev/">
+<link href="//framerake.dev" rel="canonical">
+<link href="//assets.framerake" rel="dns-prefetch">
+<!-- CSS -->
+<link href="/assets/css/main.css" rel="stylesheet">
+<!-- CSS -->
+<link href="/assets/icons/apple-touch-144.png" rel="apple-touch-icon" sizes="144x144">
+<link href="/assets/icons/apple-touch-114.png" rel="apple-touch-icon" sizes="114x114">
+<link href="/assets/icons/apple-touch-72.png" rel="apple-touch-icon" sizes="72x72">
+<link href="/assets/icons/apple-touch-57.png" rel="apple-touch-icon" sizes="57x57">
+<link href="/assets/icons/favicon.png" rel="icon" type="image/png">
+<!-- JS -->
+<script src="/assets/js/libs/conditionizr-2.1.1.min.js"></script>
+<script src="/assets/js/libs/head.core-0.99.min.js"></script>
+<script src="/assets/js/libs/jquery-1.9.1.min.js"></script>
+<script>
+conditionizr({
+  scriptSrc: 'assets/js/conditionizr/',
+  styleSrc: 'assets/css/conditionizr/',
+  ieLessThan: {
+    active: true,
+    version: '9',
+    styles: true
+  },
+  chrome: { classes: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
+  safari: { classes: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
+  opera: { classes: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
+  firefox: { classes: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
+  ie10: { customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
+  ie9: { styles: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
+  ie8: { customScript: '/assets/js/plugins/jquery.extended-selectors-1.0.0.min.js, /assets/js/libs/selectivizr-1.0.3b.min.js'
+  },
+  retina: { classes: true, customScript: '/assets/js/libs/retina-0.0.2.min.js' },
+  mac: true, win: true, linux: true
+});
+</script>
+<!-- JS -->
+</head>

@@ -9,14 +9,13 @@ gem 'os'
 
 # SASS compiling
 gem 'compass'
-gem 'compass-normalize'
+gem 'bootstrap-sass'
 gem 'compass-validator'
 #gem 'sass'
 gem 'sass-globbing'
 
 # 3rd-party libs
-#gem 'bourbon'
-gem 'neat'
+gem 'bourbon'
 
 # Coffee-Script compiling
 gem 'therubyracer', :require => 'v8'

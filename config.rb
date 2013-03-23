@@ -1,5 +1,6 @@
 # Require any additional compass plugins here.
-require 'compass-normalize'
+require 'bootstrap-sass'
+
 require 'compass-validator'
 require 'sass-globbing'
 

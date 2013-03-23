@@ -26,7 +26,6 @@ desc "initalizes the 3rd-party libraries"
 task :init do
 	Dir.chdir "src/assets/sass/libs"
 	system("bourbon install")
-	system("neat install")
 	#puts "Initialized 3rd-party libraries..."
 end
 
@@ -36,7 +35,6 @@ desc "updates the 3rd-party libraries"
 task :update do
 	Dir.chdir "src/assets/sass/libs"
 	system("bourbon update")
-	system("neat update")
 	#puts "Updated 3rd-party libraries..."
 end
 

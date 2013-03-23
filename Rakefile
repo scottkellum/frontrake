@@ -175,7 +175,7 @@ task :compile_html do
 		src = file
 		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
 		if File.exist? out
-			FileUtils.rm out 
+			FileUtils.rm out
 		end
 		FileUtils.cp src, out
 	end
@@ -255,10 +255,6 @@ task :watch_osx do
 		elsif dir.include? 'src/templates'
 			Rake::Task['compile_html'].execute
 		end
-	end
-
-	Signal.trap('INT') do
-	    notifier.stop
 	end
 
 	notifier.run

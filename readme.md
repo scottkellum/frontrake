@@ -38,11 +38,7 @@ Features can be splitted into two divisions: One for the framework & one for the
 
 Installation is easy. Clone the repository, `cd` to it's location and run:
 
-    rake install
-
-or if you haven't `Rake` installed yet:
-
-    sudo gem install
+    sudo bundle install
 
 ## Tasks
 
@@ -51,7 +47,6 @@ To get a list of all available tasks, run `rake -T`:
     rake build     # builds the project files
     rake compile   # compiles the source files
     rake init      # initalizes the 3rd-party libraries
-    rake install   # installs the gems and initialized the project
     rake optimize  # optimizes static asset files
     rake pack      # packages the current build
     rake remove    # removes all non-source files
@@ -71,3 +66,4 @@ For the moment you have to stick with _my_ folder structure, e.g. it's basics:
     ---- /templates - HAML/HTML root
     
     -- /dist - output directory
+    -- /packs - archive/backup directory

@@ -2,14 +2,14 @@
 *.lock
 
 # sass/compass cache
-**/.sass-cache
+.sass-cache
 
 # build output dir
-dist/**/*
+dist/
 .dist_tmp
 
 # backup/package dir
-packs/**/*
+packs/
 
 # sass libs
 src/assets/sass/libs/bourbon

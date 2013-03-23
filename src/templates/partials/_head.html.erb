@@ -6,6 +6,7 @@
 	site_title = "frontrake"
 	site_lang = "en"
 
+	base_url = "http://127.0.0.1:8000/"
 	base_domain = "frontrake.dev"
 
 
@@ -14,7 +15,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%= site_title %></title>
-<base href="http://<%= base_domain %>/">
+<base href="<%= base_url %>">
 <link href="//<%= base_domain %>" rel="canonical">
 <link href="//assets.<%= base_domain %>" rel="dns-prefetch">
 <!-- CSS -->

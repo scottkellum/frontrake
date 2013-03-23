@@ -1,30 +1,40 @@
-source "http://rubygems.org"
+# source for RubyGems
+source 'http://rubygems.org'
+ruby '1.9.3'
 
-# requirement
+# rake gem required to run tasks
 gem 'rake'
+gem 'fileutils'
+gem 'os'
 
-# css compiling
+# SASS compiling
 gem 'compass'
 gem 'compass-normalize'
+#gem 'sass'
 gem 'sass-globbing'
 
-# css libs
-gem 'bourbon'
+# 3rd-party libs
+#gem 'bourbon'
 gem 'neat'
 
-# js compiling
+# Coffee-Script compiling
+gem 'therubyracer', :require => 'v8'
 gem 'coffee-script'
 
-# optimizers
+# Images & CSS/JS optimizers/minifiers
 gem 'smusher'
 gem 'reduce'
-#gem 'sprockets'
 
-# builder
+# Generators/Builders
 gem 'stasis'
 gem 'yajl-ruby'
 
-# watcher/server
-gem 'rb-fsevent'
+# Filesystem event listeners
+gem 'rb-inotify', :require => false
+gem 'rb-fsevent', :require => false
+gem 'rb-fchange', :require => false
+
+# Server/LiveReload
+#gem 'guard'
 gem 'guard-livereload'
 gem 'serve'

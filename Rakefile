@@ -1,42 +1,49 @@
-require 'rb-fsevent'
-require 'webrick'
+require 'fileutils'
 
-include WEBrick
+require 'os'
+if OS.windows?
+	require 'rb-fchange'
+elsif OS.osx?
+	require 'rb-fsevent'
+elsif OS.posix?
+	require 'rb-inotify'
+end
+
+
+task :default => [:server]
+
 
 ################################################################################################
 # PUBLIC TASKS
 ################################################################################################
 
-# INSTALL
-# installs the gems and initialized the project
-desc "installs the gems and initialized the project"
-task :install do
-	%x{ bundle install }
-	puts "Installed required gems..."
-	Rake::Task['init'].invoke
-end
-
 # INIT
 # initalizes the 3rd-party libraries
 desc "initalizes the 3rd-party libraries"
 task :init do
-	%x{ cd src/assets/sass/libs && bourbon install && neat install }
-	puts "Initialized 3rd-party libraries..."
+	Dir.chdir "src/assets/sass/libs"
+	system("bourbon install")
+	system("neat install")
+	#puts "Initialized 3rd-party libraries..."
 end
 
 # UPDATE
 # updates the 3rd-party libraries
 desc "updates the 3rd-party libraries"
 task :update do
-	%x{ cd src/assets/sass/libs && bourbon update && neat update }
-	puts "Updated 3rd-party libraries..."
+	Dir.chdir "src/assets/sass/libs"
+	system("bourbon update")
+	system("neat update")
+	#puts "Updated 3rd-party libraries..."
 end
 
 # REMOVE
 # removes all non-source files
 desc "removes all non-source files"
 task :remove do
-	%x{ rm -rf dist .dist_tmp .sass-cache }
+	FileUtils.rm_rf "dist"
+	FileUtils.rm_rf ".dist_tmp"
+	FileUtils.rm_rf ".sass-cache"
 	puts "Removed non-source files from project..."
 end
 
@@ -72,26 +79,15 @@ end
 # watches for changes and fires compile()
 desc "watches for changes and fires compile()"
 task :watch do
-	puts "Watching source files for changes..."
-
-	paths = ['src/assets/sass', 'src/assets/js', 'src/templates']
-	options = { :latency => 0.75, :no_defer => true }
-
-	fsevent = FSEvent.new
-	fsevent.watch paths, options do |directories|
-		puts "Detected change inside: #{directories.inspect}"
-		dir = directories.inspect.to_s
-
-		if dir.include? 'src/assets/sass'
-			Rake::Task['compile_css'].execute
-		elsif dir.include? 'src/assets/js'
-			Rake::Task['compile_js'].execute
-		elsif dir.include? 'src/templates'
-			Rake::Task['compile_html'].execute
-		end
+	if OS.windows?
+		Rake::Task['watch_windows'].execute
+	elsif OS.osx?
+		Rake::Task['watch_osx'].execute
+	elsif OS.posix?
+		Rake::Task['watch_linux'].execute
 	end
 
-	fsevent.run
+	puts "Watching source files for changes..."
 end
 
 # SERVER
@@ -106,8 +102,11 @@ task :pack do
 	date = Time.now
 	date = date.strftime("%Y-%m-%d_%H-%M")
 
-	if File.directory? 'dist'
-		%x{ tar -zcf packs/#{date}.tar.gz dist }
+	if File.directory? "dist"
+		unless File.directory? "packs"
+			FileUtils.mkdir "packs"
+		end
+		system("tar -zcf packs/#{date}.tar.gz dist")
 	else
 		puts "Not created. Dist directory doesn't exist..."
 	end
@@ -121,14 +120,19 @@ end
 # CLEAN
 # cleans the dist directory
 task :clean do
-	%x{ rm -rf dist/.git dist/.sass-cache dist/assets/sass dist/templates }
+	FileUtils.rm_rf "dist/.git"
+	FileUtils.rm_rf "dist/.sass-cache"
+	FileUtils.rm_rf "dist/assets/sass"
+	FileUtils.rm_rf "dist/templates"
 	puts "Cleaned build directory..."
 end
 
 # CREATE
 # creates the dist dir by copying src
 task :create do
-	%x{ cp -R src dist }
+	files = Dir.glob("src/*")
+	FileUtils.mkdir "dist"
+	FileUtils.cp_r files, "dist"
 	puts "Created build directory..."
 end
 
@@ -142,14 +146,14 @@ task :serve do
 	puts "  Serve can be access via: http://127.0.0.1:8000"
 	puts "####################################################"
 	puts "\n"
-	%x{ serve 8000 dist }
+	%x{serve 8000 dist}
 end
 
 # GUARD
 # starts Guards (LiveReload)
 task :guard do
 	puts "Starting Guard LiveReload...."
-	%x{ guard start --no-bundler-warning }
+	%x{guard start --no-bundler-warning --notify false}
 end
 
 
@@ -159,18 +163,21 @@ end
 # COMPILE-CSS
 # compiles sass files with compass
 task :compile_css do
-	%x{ compass compile }
+	%x{compass compile}
 	puts "Compiled Sass to CSS..."
 end
 
 # COMPILE-HTML
 # compiles HAML to HTML
 task :compile_html do
-	%x{ stasis -p .dist_tmp -o src/templates }
+	%x{stasis -p .dist_tmp -o src/templates}
 	FileList['.dist_tmp/src/templates/**/*.html'].exclude('.dist_tmp/src/templates/partials/**/_*.html').each do |file|
 		src = file
 		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
-		%x{ cp -f #{src} #{out} }
+		if File.exist? out
+			FileUtils.rm out
+		end
+		FileUtils.cp src, out
 	end
 	puts "Compiled ERB to HTML..."
 end
@@ -178,8 +185,9 @@ end
 # COMPILE-JS
 # compiles coffee-script to JS
 task :compile_js do
-	%x{ stasis -p .dist_tmp -o src/assets/js }
-	%x{ rm -rf dist/assets/js && cp -R .dist_tmp/src/assets/js dist/assets/ }
+	%x{stasis -p .dist_tmp -o src/assets/js}
+	FileUtils.rm_rf "dist/assets/js"
+	FileUtils.cp_r ".dist_tmp/src/assets/js", "dist/assets"
 	puts "Compiled Coffee-Script to JS..."
 end
 
@@ -190,7 +198,7 @@ end
 # OPTIMIZE-IMG
 # shrinks image files
 task :optimize_img do
-	%x{ smusher dist/img }
+	system("smusher dist/img")
 	puts "Optimized images...."
 end
 
@@ -198,7 +206,71 @@ end
 # minifies JS files
 task :optimize_js do
 	FileList['dist/assets/js/**/*.js'].exclude('dist/assets/js/**/*.min.js').each do |file|
-		%x{ reduce -o #{file} }
+		system("reduce -o #{file}")
 	end
 	puts "Optimized/minified JS assets..."
+end
+
+
+# WATCH
+################################################################################################
+
+# WATCH-WINDOWS
+# watches for changes on windows plattforms
+task :watch_windows do
+	notifier = FChange::Notifier.new
+
+  	notifier.watch("src/assets/sass", :all_events, :recursive) do |event|
+    	Rake::Task['compile_css'].execute
+  	end
+  	notifier.watch("src/assets/js", :all_events, :recursive) do |event|
+    	Rake::Task['compile_js'].execute
+  	end
+  	notifier.watch("src/templates", :all_events, :recursive) do |event|
+    	Rake::Task['compile_html'].execute
+  	end
+
+  	Signal.trap('INT') do
+	    notifier.stop
+	end
+
+  	notifier.run
+end
+
+# WATCH-OSX
+# watches for changes on osx plattforms
+task :watch_osx do
+	paths = ['src/assets/sass', 'src/assets/js', 'src/templates']
+	options = { :latency => 0.75, :no_defer => true }
+
+	notifier = FSEvent.new
+	notifier.watch paths, options do |directories|
+		puts "Detected change inside: #{directories.inspect}"
+		dir = directories.inspect.to_s
+
+		if dir.include? 'src/assets/sass'
+			Rake::Task['compile_css'].execute
+		elsif dir.include? 'src/assets/js'
+			Rake::Task['compile_js'].execute
+		elsif dir.include? 'src/templates'
+			Rake::Task['compile_html'].execute
+		end
+	end
+
+	notifier.run
+end
+
+# WATCH-LINUX
+# watches for changes on linux plattforms
+task :watch_linux do
+	notifier = INotify::Notifier.new
+
+	notifier.watch("src/assets/sass", :modify, :moved_to, :create, :delete)
+		Rake::Task['compile_css'].execute
+	notifier.watch("src/assets/js", :modify, :moved_to, :create, :delete)
+		Rake::Task['compile_js'].execute
+	notifier.watch("src/templates", :modify, :moved_to, :create, :delete)
+		Rake::Task['compile_html'].execute
+
+	notifier.run
 end

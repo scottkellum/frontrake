@@ -110,6 +110,7 @@ task :pack do
 			FileUtils.mkdir "packs"
 		end
 		system("tar -zcf packs/#{date}.tar.gz dist")
+		puts "Created archive at packs/#{date}.tar.gz".colorize( :color => :green )
 	else
 		puts "Not created. Dist directory doesn't exist...".colorize( :color => :yellow )
 	end

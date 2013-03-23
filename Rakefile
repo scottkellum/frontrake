@@ -231,12 +231,15 @@ task :watch_windows do
 	notifier = FChange::Notifier.new
 
   	notifier.watch("src/assets/sass", :all_events, :recursive) do |event|
+  		puts "Detected change inside: src/assets/sass".colorize( :color => :yellow )
     	Rake::Task['compile_css'].execute
   	end
   	notifier.watch("src/assets/js", :all_events, :recursive) do |event|
+  		puts "Detected change inside: src/assets/js".colorize( :color => :yellow )
     	Rake::Task['compile_js'].execute
   	end
   	notifier.watch("src/templates", :all_events, :recursive) do |event|
+  		puts "Detected change inside: src/templates".colorize( :color => :yellow )
     	Rake::Task['compile_html'].execute
   	end
 
@@ -255,7 +258,7 @@ task :watch_osx do
 
 	notifier = FSEvent.new
 	notifier.watch paths, options do |directories|
-		puts "Detected change inside: #{directories.inspect}"
+		puts "Detected change inside: #{directories.inspect}".colorize( :color => :yellow )
 		dir = directories.inspect.to_s
 
 		if dir.include? 'src/assets/sass'
@@ -276,10 +279,13 @@ task :watch_linux do
 	notifier = INotify::Notifier.new
 
 	notifier.watch("src/assets/sass", :modify, :moved_to, :create, :delete)
+		puts "Detected change inside: src/assets/sass".colorize( :color => :yellow )
 		Rake::Task['compile_css'].execute
 	notifier.watch("src/assets/js", :modify, :moved_to, :create, :delete)
+		puts "Detected change inside: src/assets/js".colorize( :color => :yellow )
 		Rake::Task['compile_js'].execute
 	notifier.watch("src/templates", :modify, :moved_to, :create, :delete)
+		puts "Detected change inside: src/templates".colorize( :color => :yellow )
 		Rake::Task['compile_html'].execute
 
 	notifier.run

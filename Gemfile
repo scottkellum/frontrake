@@ -30,6 +30,9 @@ gem 'reduce'
 gem 'stasis'
 gem 'yajl-ruby'
 
+# Utilities
+gem 'colorize'
+
 # Filesystem event listeners
 gem 'rb-inotify', :require => false
 gem 'rb-fsevent', :require => false

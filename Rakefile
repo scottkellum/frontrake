@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'colorize'
 
 require 'os'
 if OS.windows?
@@ -46,7 +47,7 @@ task :remove do
 	FileUtils.rm_rf "dist"
 	FileUtils.rm_rf ".dist_tmp"
 	FileUtils.rm_rf ".sass-cache"
-	puts "Removed non-source files from project..."
+	puts "Removed non-source files from project...".colorize( :color => :green )
 end
 
 # COMPILE
@@ -81,6 +82,8 @@ end
 # watches for changes and fires compile()
 desc "watches for changes and fires compile()"
 task :watch do
+	puts "Watching source files for changes...".colorize( :color => :light_blue )
+
 	if OS.windows?
 		Rake::Task['watch_windows'].execute
 	elsif OS.osx?
@@ -88,8 +91,6 @@ task :watch do
 	elsif OS.posix?
 		Rake::Task['watch_linux'].execute
 	end
-
-	puts "Watching source files for changes..."
 end
 
 # SERVER
@@ -110,7 +111,7 @@ task :pack do
 		end
 		system("tar -zcf packs/#{date}.tar.gz dist")
 	else
-		puts "Not created. Dist directory doesn't exist..."
+		puts "Not created. Dist directory doesn't exist...".colorize( :color => :yellow )
 	end
 end
 
@@ -126,7 +127,7 @@ task :clean do
 	FileUtils.rm_rf "dist/.sass-cache"
 	FileUtils.rm_rf "dist/assets/sass"
 	FileUtils.rm_rf "dist/templates"
-	puts "Cleaned build directory..."
+	puts "Cleaned build directory...".colorize( :color => :green )
 end
 
 # CREATE
@@ -135,18 +136,18 @@ task :create do
 	files = Dir.glob("src/*")
 	FileUtils.mkdir "dist"
 	FileUtils.cp_r files, "dist"
-	puts "Created build directory..."
+	puts "Created build directory...".colorize( :color => :green )
 end
 
 # SERVE
 # starts the serve server
 task :serve do
 	Rake::Task['build'].invoke
-	puts "Starting Serve web server..."
+	puts "Starting Serve web server...".colorize( :color => :light_blue )
 	puts "\n"
-	puts "####################################################"
-	puts "  Serve can be access via: http://127.0.0.1:8000"
-	puts "####################################################"
+	puts "####################################################".colorize( :background => :light_blue )
+	puts "  Serve can be access via: http://127.0.0.1:8000    ".colorize( :background => :light_blue )
+	puts "####################################################".colorize( :background => :light_blue )
 	puts "\n"
 	%x{serve 8000 dist}
 end
@@ -154,7 +155,7 @@ end
 # GUARD
 # starts Guards (LiveReload)
 task :guard do
-	puts "Starting Guard LiveReload...."
+	puts "Starting Guard LiveReload....".colorize( :color => :light_blue )
 	%x{guard start --no-bundler-warning --notify false}
 end
 
@@ -166,7 +167,7 @@ end
 # compiles sass files with compass
 task :compile_css do
 	%x{compass compile}
-	puts "Compiled Sass to CSS..."
+	puts "Compiled Sass to CSS...".colorize( :color => :green )
 end
 
 # COMPILE-HTML
@@ -181,7 +182,7 @@ task :compile_html do
 		end
 		FileUtils.cp src, out
 	end
-	puts "Compiled ERB to HTML..."
+	puts "Compiled ERB to HTML...".colorize( :color => :green )
 end
 
 # COMPILE-JS
@@ -190,7 +191,7 @@ task :compile_js do
 	%x{stasis -p .dist_tmp -o src/assets/js}
 	FileUtils.rm_rf "dist/assets/js"
 	FileUtils.cp_r ".dist_tmp/src/assets/js", "dist/assets"
-	puts "Compiled Coffee-Script to JS..."
+	puts "Compiled Coffee-Script to JS...".colorize( :color => :green )
 end
 
 
@@ -207,7 +208,7 @@ task :optimize_img do
 			Piet.optimize(img)
 		end
 	end
-	puts "Optimized images...."
+	puts "Optimized images....".colorize( :color => :green )
 end
 
 # OPTIMIZE-JS
@@ -216,7 +217,7 @@ task :optimize_js do
 	FileList['dist/assets/js/**/*.js'].exclude('dist/assets/js/**/*.min.js').each do |file|
 		system("reduce -o #{file}")
 	end
-	puts "Optimized/minified JS assets..."
+	puts "Optimized/minified JS assets...".colorize( :color => :green )
 end
 
 

@@ -40,6 +40,21 @@ Installation is easy. Clone the repository, `cd` to it's location and run:
 
     sudo bundle install
 
+You might also need to install those packages (before):
+    
+    # OSX (Homebrew)
+    brew install imagemagick optipng jpegoptim readline zlib
+    
+    # Debian
+    apt-get install imagemagick optipng jpegoptim readline zlib
+    
+    # CentOS
+    yum install ImageMagick optipng readline zlib
+    compile jpegoptim from source (https://github.com/tjko/jpegoptim)
+    
+    # Windows
+    cygwin -> ImageMagick readline zlib
+
 ## Tasks
 
 To get a list of all available tasks, run `rake -T`:

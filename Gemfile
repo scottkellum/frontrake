@@ -9,25 +9,29 @@ gem 'os'
 
 # SASS compiling
 gem 'compass'
-gem 'compass-normalize'
+gem 'bootstrap-sass'
+gem 'compass-validator'
 #gem 'sass'
 gem 'sass-globbing'
 
 # 3rd-party libs
-#gem 'bourbon'
-gem 'neat'
+gem 'bourbon'
 
 # Coffee-Script compiling
 gem 'therubyracer', :require => 'v8'
 gem 'coffee-script'
 
 # Images & CSS/JS optimizers/minifiers
-gem 'smusher'
+gem 'smusher', :require => false
+gem 'piet', :require => false
 gem 'reduce'
 
 # Generators/Builders
 gem 'stasis'
 gem 'yajl-ruby'
+
+# Utilities
+gem 'colorize'
 
 # Filesystem event listeners
 gem 'rb-inotify', :require => false

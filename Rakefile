@@ -5,9 +5,13 @@ if OS.windows?
 	require 'rb-fchange'
 elsif OS.osx?
 	require 'rb-fsevent'
-else
+elsif OS.poxis?
 	require 'rb-inotify'
 end
+
+
+task :default => [:server]
+
 
 ################################################################################################
 # PUBLIC TASKS
@@ -81,7 +85,7 @@ task :watch do
 		Rake::Task['watch_windows'].execute
 	elsif OS.osx?
 		Rake::Task['watch_osx'].execute
-	else
+	elsif OS.posix?
 		Rake::Task['watch_linux'].execute
 	end
 end

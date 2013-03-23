@@ -1,5 +1,6 @@
 # source for RubyGems
 source 'http://rubygems.org'
+ruby '1.9.3'
 
 # make sure RubyGems & bundler are present
 require 'rubygems'

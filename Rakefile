@@ -69,7 +69,16 @@ end
 # validates the generated CSS (W3C)
 desc "validates the generated CSS (W3C)"
 task :validate do
+	if Dir.exists? "dist"
+		dist = true
+	end
+
 	system("compass validate")
+
+	FileUtils.rm_rf ".sass-cache"
+	if !dist
+		FileUtils.rm_rf "dist"
+	end
 end
 
 # BUILD

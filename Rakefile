@@ -67,6 +67,13 @@ task :optimize do
 	Rake::Task['optimize_js'].invoke
 end
 
+# VALIDATE
+# validates the generated CSS (W3C)
+desc "validates the generated CSS (W3C)"
+task :validate do
+	system("compass validate")
+end
+
 # BUILD
 # builds the project files
 desc "builds the project files"

@@ -10,6 +10,7 @@ gem 'os'
 # SASS compiling
 gem 'compass'
 gem 'compass-normalize'
+gem 'compass-validator'
 #gem 'sass'
 gem 'sass-globbing'
 

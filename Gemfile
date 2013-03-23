@@ -22,7 +22,8 @@ gem 'therubyracer', :require => 'v8'
 gem 'coffee-script'
 
 # Images & CSS/JS optimizers/minifiers
-gem 'smusher'
+gem 'smusher', :require => false
+gem 'piet', :require => false
 gem 'reduce'
 
 # Generators/Builders

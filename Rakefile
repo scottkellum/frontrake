@@ -5,8 +5,10 @@ if OS.windows?
 	require 'rb-fchange'
 elsif OS.osx?
 	require 'rb-fsevent'
+	require 'piet'
 elsif OS.posix?
 	require 'rb-inotify'
+	require 'piet'
 end
 
 
@@ -198,7 +200,13 @@ end
 # OPTIMIZE-IMG
 # shrinks image files
 task :optimize_img do
-	system("smusher dist/img")
+	FileList['dist/img/*'].each do |img|
+		if OS.windows?
+			system("smusher dist/img")
+		else
+			Piet.optimize(img)
+		end
+	end
 	puts "Optimized images...."
 end
 

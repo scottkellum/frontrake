@@ -62,6 +62,7 @@ end
 desc "optimizes static asset files"
 task :optimize do
 	Rake::Task['optimize_img'].invoke
+	Rake::Task['optimize_css'].invoke
 	Rake::Task['optimize_js'].invoke
 end
 
@@ -151,6 +152,7 @@ task :create do
 	files = Dir.glob("src/*")
 	FileUtils.mkdir "dist"
 	FileUtils.cp_r files, "dist"
+	FileUtils.cp "src/.htaccess", "dist/.htaccess"
 	puts "Created build directory...".colorize( :color => :green )
 end
 
@@ -212,6 +214,15 @@ end
 
 # OPTIMIZE
 ################################################################################################
+
+# OPTIMIZE-CSS
+# minifies CSS files
+task :optimize_css do
+	FileList['dist/assets/css/**/*.css'].exclude('dist/assets/css/**/*.min.css').each do |file|
+		system("reduce -o #{file}")
+	end
+	puts "Optimized/minified CSS assets...".colorize( :color => :green )
+end
 
 # OPTIMIZE-IMG
 # shrinks image files

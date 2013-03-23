@@ -5,7 +5,7 @@ if OS.windows?
 	require 'rb-fchange'
 elsif OS.osx?
 	require 'rb-fsevent'
-elsif OS.poxis?
+elsif OS.posix?
 	require 'rb-inotify'
 end
 
@@ -174,7 +174,9 @@ task :compile_html do
 	FileList['.dist_tmp/src/templates/**/*.html'].exclude('.dist_tmp/src/templates/partials/**/_*.html').each do |file|
 		src = file
 		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
-		FileUtils.rm out if out.exists?
+		if File.exist? out
+			FileUtils.rm out 
+		end
 		FileUtils.cp src, out
 	end
 	puts "Compiled ERB to HTML..."

@@ -2,10 +2,6 @@
 source 'http://rubygems.org'
 ruby '1.9.3'
 
-# make sure RubyGems & bundler are present
-require 'rubygems'
-require 'bundler/setup'
-
 # rake gem required to run tasks
 gem 'rake'
 gem 'fileutils'
@@ -14,13 +10,15 @@ gem 'os'
 # SASS compiling
 gem 'compass'
 gem 'compass-normalize'
+#gem 'sass'
 gem 'sass-globbing'
 
 # 3rd-party libs
-gem 'bourbon'
+#gem 'bourbon'
 gem 'neat'
 
 # Coffee-Script compiling
+gem 'therubyracer', :require => 'v8'
 gem 'coffee-script'
 
 # Images & CSS/JS optimizers/minifiers
@@ -37,5 +35,6 @@ gem 'rb-fsevent', :require => false
 gem 'rb-fchange', :require => false
 
 # Server/LiveReload
+#gem 'guard'
 gem 'guard-livereload'
 gem 'serve'

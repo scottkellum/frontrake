@@ -7,33 +7,145 @@
 
 /**
  * VARIABLES
- * frontsass framework variables
+ * bootstrap customize variables
  */
 
-/* GLOBALS
- * basic global styling */
-$font-size: 14px
-$line-height: golden-ratio($font-size, 1)
-
-/* SPACING
+/* SCAFFOLDING
  * */
-$margin-bottom: 20px
-$list-padding: 15px
+$bodyBackground: #fff
+$textColor: #333
+
+/* LINKS
+ * */
+$linkColor: #08c
+$linkColorHover: darken($linkColor, 15%)
 
 /* COLORS
- * color variables */
-$color-scheme: darken // lighten|darken
-$bg-color: #fff
+ * */
+$white: #fff
 
-$primary: #333
-$secondary: #666
+$blue: #049cdb
+$green: #46a546
+$red: #9d261d
+$yellow: #ffc40d
+$orange: #f89406
+$pink: #c3325f
+$purple: #7a43b6
 
-$link-color: #444
-$link-hover: #555
+/* SPRITES
+ * */
+$iconSpritePath: "/img/glyphicons-halflings.png"
+$iconWhiteSpritePath: "/img/glyphicons-halflings-white.png"
+
+/* GRID SYSTEM
+ * */
+$gridColumns: 12
+$gridColumnWidth: 60px
+$gridGutterWidth: 20px
+
+$gridColumnWidth1200: 70px
+$gridGutterWidth1200: 30px
+
+$gridColumnWidth768: 42px
+$gridGutterWidth768: 20px
+
+/* TYPOGRAPHY
+ * */
+$sansFontFamily: $helvetica
+$serifFontFamily: $georgia
+$monoFontFamily: $monospace
+
+$baseFontSize: 14px
+$baseFontFamily: $sansFontFamily
+$baseLineHeight: 20px
+
+$altFontFamily: $serifFontFamily
+$headingsFontFamily: inherit
+$headingsFontWeight: bold
+$headingsColor: inherit
+
+$fontSizeLarge: $baseFontSize * 1.25
+$fontSizeSmall: $baseFontSize * 0.85
+$fontSizeMini: $baseFontSize * 0.75
+
+$paddingLarge: 11px 19px
+$paddingSmall: 2px 10px
+$paddingMini: 1px 6px
+
+$baseBorderRadius: 4px
+$borderRadiusLarge: 6px
+$borderRadiusSmall: 3px
+
+$heroUnitBackground: #ebebeb
+$heroUnitHeadingColor: inherit
+$heroUnitLeadColor: inherit
+
+/* TABLES
+ * */
+$tableBackground: transparent
+$tableBackgroundAccent: #f9f9f9
+$tableBackgroundHover: #f5f5f5
+$tableBorder: #ddd
 
 /* FORMS
- * form element variables */
-$input-padding: 8px
+ * */
+$placeholderText: #ebebeb
+
+$inputBackground: $white
+$inputBorder: #ccc
+$inputBorderRadius: 3px
+
+$inputDisabledBackground: #f9f9f9
+$formActionsBackground: #f5f5f5
+
+$btnPrimaryBackground: $linkColor
+$btnPrimaryBackgroundHighlight: darken($white, 10%)
+
+/* FORM STATES & ALERTS
+ * */
+$warningText: #c09853
+$warningBackground: #fcf8e3
+
+$errorText: #b94a48
+$errorBackground: #f2dede
+
+$successText: #468847
+$successBackground: #dff0d8
+
+$infoText: #3a87ad
+$infoBackground: #d9edf7
+
+/* NAVBAR
+ * */
+$navbarHeight: 40px
+$navbarBackground: #222
+$navbarBackgroundHighlight: #333
+
+$navbarText: #999
+$navbarBrandColor: #999 //$navbarLinkColor
+
+$navbarLinkColor: #999
+$navbarLinkColorHover: $white
+$navbarLinkColorActive: $navbarLinkColorHover
+$navbarLinkBackgroundHover: transparent
+$navbarLinkBackgroundActive: $navbarBackground
+
+$navbarSearchBackground: lighten($navbarBackground, 25%)
+$navbarSearchBackgroundFocus: $white
+$navbarSearchBorder: darken($navbarSearchBackground, 30%)
+$navbarSearchPlaceholderColor: #ccc
+
+$navbarCollapseWidth: 979px
+$navbarCollapseDesktopWidth: $navbarCollapseWidth + 1
+
+/* DROPDOWNS
+ * */
+$dropdownBackground: $white
+$dropdownBorder: rgba(0, 0, 0, .2)
+
+$dropdownLinkColor: #333
+$dropdownLinkColorHover: $white
+$dropdownLinkBackgroundHover: $linkColor
 
 
 /**

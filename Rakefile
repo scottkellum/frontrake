@@ -85,18 +85,18 @@ task :watch do
 	puts "Watching source files for changes...".colorize( :color => :light_blue )
 
 	if OS.windows?
-		Rake::Task['watch_windows'].execute
+		Rake::Task['watch_windows'].invoke
 	elsif OS.osx?
-		Rake::Task['watch_osx'].execute
+		Rake::Task['watch_osx'].invoke
 	elsif OS.posix?
-		Rake::Task['watch_linux'].execute
+		Rake::Task['watch_linux'].invoke
 	end
 end
 
 # SERVER
 # runs a local webserver and watches for changes
 desc "runs a local webserver and watches for changes"
-multitask :server => [ :serve, :watch, :guard ]
+multitask :server => [ :watch, :serve, :guard ]
 
 # PACK
 # packages the current build
@@ -157,7 +157,7 @@ end
 # starts Guards (LiveReload)
 task :guard do
 	puts "Starting Guard LiveReload....".colorize( :color => :light_blue )
-	%x{guard start --no-bundler-warning --notify false}
+	%x{guard start --no-bundler-warning}
 end
 
 

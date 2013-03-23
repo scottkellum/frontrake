@@ -79,8 +79,6 @@ end
 # watches for changes and fires compile()
 desc "watches for changes and fires compile()"
 task :watch do
-	puts "Watching source files for changes..."
-
 	if OS.windows?
 		Rake::Task['watch_windows'].execute
 	elsif OS.osx?
@@ -88,6 +86,8 @@ task :watch do
 	elsif OS.posix?
 		Rake::Task['watch_linux'].execute
 	end
+
+	puts "Watching source files for changes..."
 end
 
 # SERVER
@@ -146,14 +146,14 @@ task :serve do
 	puts "  Serve can be access via: http://127.0.0.1:8000"
 	puts "####################################################"
 	puts "\n"
-	system("serve 8000 dist")
+	%x{serve 8000 dist}
 end
 
 # GUARD
 # starts Guards (LiveReload)
 task :guard do
 	puts "Starting Guard LiveReload...."
-	system("guard start --no-bundler-warning --notify false")
+	%x{guard start --no-bundler-warning --notify false}
 end
 
 
@@ -163,14 +163,14 @@ end
 # COMPILE-CSS
 # compiles sass files with compass
 task :compile_css do
-	system("compass compile")
+	%x{compass compile}
 	puts "Compiled Sass to CSS..."
 end
 
 # COMPILE-HTML
 # compiles HAML to HTML
 task :compile_html do
-	system("stasis -p .dist_tmp -o src/templates")
+	%x{stasis -p .dist_tmp -o src/templates}
 	FileList['.dist_tmp/src/templates/**/*.html'].exclude('.dist_tmp/src/templates/partials/**/_*.html').each do |file|
 		src = file
 		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
@@ -185,7 +185,7 @@ end
 # COMPILE-JS
 # compiles coffee-script to JS
 task :compile_js do
-	system("stasis -p .dist_tmp -o src/assets/js")
+	%x{stasis -p .dist_tmp -o src/assets/js}
 	FileUtils.rm_rf "dist/assets/js"
 	FileUtils.cp_r ".dist_tmp/src/assets/js", "dist/assets"
 	puts "Compiled Coffee-Script to JS..."
@@ -275,10 +275,6 @@ task :watch_linux do
 		Rake::Task['compile_js'].execute
 	notifier.watch("src/templates", :modify, :moved_to, :create, :delete)
 		Rake::Task['compile_html'].execute
-
-	Signal.trap('INT') do
-	    notifier.stop
-	end
 
 	notifier.run
 end

@@ -1,0 +1,11 @@
+/////////////////////////////////////////////////////////
+// # BORDER-BOXED
+// easily add box-sizing: border-box to any html element
+/////////////////////////////////////////////////////////
+
+@mixin border-boxed($divider, $borderPadding)
+	@if unitless($divider)
+		$divider: 100 / $divider
+		*width: unquote("expression((this.parentNode.clientWidth/#{$divider} - parseInt(#{$borderPadding})) + 'px')")
+	@else
+		*width: $divider - $borderPadding

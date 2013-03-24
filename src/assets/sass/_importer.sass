@@ -1,20 +1,23 @@
-/**
- * BOURBON
- * A simple and lightweight mixin library for Sass
- */
+/////////////////////////////////////////////////////////
+// # BOURBON
+// A simple and lightweight mixin library for Sass
+/////////////////////////////////////////////////////////
+
 @import "libs/bourbon/bourbon"
 
 
-/**
- * VARIABLES
- * bootstrap customize variables
- */
+/////////////////////////////////////////////////////////
+// # VARIABLES
+// bootstrap customize variables
+/////////////////////////////////////////////////////////
 
-/* GLOBAL VALUES
- * */
+// -- GLOBAL VALUES
+/////////////////////////////////////////////////////////
 
-// GRAYS
-$black:  #000
+// __ GRAYS
+//*******************************************************
+
+$black: #000
 $grayDarker: #222
 $grayDark: #333
 $gray: #555
@@ -22,7 +25,10 @@ $grayLight: #999
 $grayLighter: #eee
 $white: #fff
 
-// ACCENT COLORS
+
+// __ ACCENT COLORS
+//*******************************************************
+
 $blue: #049cdb
 $blueDark: #0064cd
 $green: #46a546
@@ -32,15 +38,24 @@ $orange: #f89406
 $pink: #c3325f
 $purple: #7a43b6
 
-// SCAFFOLDING
+
+// __ SCAFFOLDING
+//*******************************************************
+
 $bodyBackground: $white
 $textColor: $grayDark
 
-// LINKS
+
+// __ LINKS
+//*******************************************************
+
 $linkColor: #08c
 $linkColorHover: darken($linkColor, 15%)
 
-// TYPOGRAPHY
+
+// __ TYPOGRAPHY
+//*******************************************************
+
 $sansFontFamily: $helvetica
 $serifFontFamily: $georgia
 $monoFontFamily: $monospace
@@ -51,12 +66,14 @@ $baseLineHeight: 20px
 $altFontFamily: $serifFontFamily
 
 $headingsFontFamily: inherit // empty to use BS default, $baseFontFamily
-$headingsFontWeight: bold    // instead of browser default, bold
+$headingsFontWeight: bold // instead of browser default, bold
 $headingsColor: inherit // empty to use BS default, $textColor
 
 
-// COMPONENT SIZING
+// __ COMPONENT SIZING
 // Based on 14px font-size and 20px line-height
+//*******************************************************
+
 $fontSizeLarge: $baseFontSize * 1.25 // ~18px
 $fontSizeSmall: $baseFontSize * 0.85 // ~12px
 $fontSizeMini: $baseFontSize * 0.75 // ~11px
@@ -69,13 +86,18 @@ $baseBorderRadius: 4px
 $borderRadiusLarge: 6px
 $borderRadiusSmall: 3px
 
-// TABLES
+
+// __ TABLES
+//*******************************************************
 $tableBackground: transparent // overall background-color
 $tableBackgroundAccent: #f9f9f9 // for striping
 $tableBackgroundHover: #f5f5f5 // for hover
 $tableBorder: #ddd // table and cell border
 
-// BUTTONS
+
+// __ BUTTONS
+//*******************************************************
+
 $btnBackground: $white
 $btnBackgroundHighlight: darken($white, 10%)
 $btnBorder: #ccc
@@ -98,7 +120,10 @@ $btnDangerBackgroundHighlight: #bd362f
 $btnInverseBackground: #444
 $btnInverseBackgroundHighlight: $grayDarker
 
-// FORMS
+
+// __ FORMS
+//*******************************************************
+
 $inputBackground: $white
 $inputBorder: #ccc
 $inputBorderRadius: $baseBorderRadius
@@ -106,7 +131,10 @@ $inputDisabledBackground: $grayLighter
 $formActionsBackground: #f5f5f5
 $inputHeight: $baseLineHeight + 10px // base line-height + 8px vertical padding + 2px top/bottom border
 
-// DROPDOWNS
+
+// __ DROPDOWNS
+//*******************************************************
+
 $dropdownBackground: $white
 $dropdownBorder: rgba(0,0,0,.2)
 $dropdownDividerTop: #e5e5e5
@@ -120,12 +148,13 @@ $dropdownLinkBackgroundActive: $linkColor
 $dropdownLinkBackgroundHover: $dropdownLinkBackgroundActive
 
 
-/* COMPONENT VARIABLES
- * */
+// -- COMPONENT VARIABLES
+/////////////////////////////////////////////////////////
 
-// Z-INDEX MASTER LIST
+// __ Z-INDEX MASTER LIST
 // Used for a bird's eye view of components dependent on the z-axis
-// Try to avoid customizing these :)
+//*******************************************************
+
 $zindexDropdown: 1000
 $zindexPopover: 1010
 $zindexTooltip: 1030
@@ -133,23 +162,41 @@ $zindexFixedNavbar: 1030
 $zindexModalBackdrop: 1040
 $zindexModal: 1050
 
-// SPRINTE ICONS PATH
+
+// __ SPRITE ICONS PATH
+//*******************************************************
+
 $iconSpritePath: "/img/glyphicons-halflings.png"
 $iconWhiteSpritePath: "/img/glyphicons-halflings-white.png"
 
-// INPUT PLACEHOLDER TEXT COLOR
+
+// __ INPUT PLACEHOLDER TEXT COLOR
+//*******************************************************
+
 $placeholderText: $grayLight
 
-// HR BORDER COLOR
+
+// __ HR BORDER COLOR
+//*******************************************************
+
 $hrBorder: $grayLighter
 
-// HORIZONTAL FORMS AND LISTS
+
+// __ HORIZONTAL FORMS AND LISTS
+//*******************************************************
+
 $horizontalComponentOffset: 180px
 
-// WELLS
+
+// __ WELLS
+//*******************************************************
+
 $wellBackground: #f5f5f5
 
-// NAVBAR
+
+// __ NAVBAR
+//*******************************************************
+
 $navbarCollapseWidth: 979px
 $navbarCollapseDesktopWidth: $navbarCollapseWidth + 1
 
@@ -167,7 +214,10 @@ $navbarLinkBackgroundActive: darken($navbarBackground, 5%)
 
 $navbarBrandColor: $navbarLinkColor
 
-// INVERTED NAVBAR
+
+// __ INVERTED NAVBAR
+//*******************************************************
+
 $navbarInverseBackground: #111111
 $navbarInverseBackgroundHighlight: #222222
 $navbarInverseBorder: #252525
@@ -186,17 +236,26 @@ $navbarInverseSearchPlaceholderColor: #ccc
 
 $navbarInverseBrandColor: $navbarInverseLinkColor
 
-// PAGINATION
+
+// __ PAGINATION
+//*******************************************************
+
 $paginationBackground: #fff
 $paginationBorder: #ddd
 $paginationActiveBackground: #f5f5f5
 
-// HERO UNIT
+
+// __ HERO UNIT
+//*******************************************************
+
 $heroUnitBackground: $grayLighter
 $heroUnitHeadingColor: inherit
 $heroUnitLeadColor: inherit
 
-// FORM STATES AND ALERTS
+
+// __ FORM STATES AND ALERTS
+//*******************************************************
+
 $warningText: #c09853
 $warningBackground: #fcf8e3
 $warningBorder: darken(adjust-hue($warningBackground, -10), 3%)
@@ -213,7 +272,10 @@ $infoText: #3a87ad
 $infoBackground: #d9edf7
 $infoBorder: darken(adjust-hue($infoBackground, -10), 7%)
 
-// TOOLTIPS AND POPOVERS
+
+// __ TOOLTIPS AND POPOVERS
+//*******************************************************
+
 $tooltipColor: #fff
 $tooltipBackground: #000
 $tooltipArrowWidth: 5px
@@ -224,52 +286,74 @@ $popoverArrowWidth: 10px
 $popoverArrowColor: #fff
 $popoverTitleBackground: darken($popoverBackground, 3%)
 
-// ENHANCEMENT FOR POPOVERS
+
+// __ ENHANCEMENT FOR POPOVERS
+//*******************************************************
+
 $popoverArrowOuterWidth: $popoverArrowWidth + 1
 $popoverArrowOuterColor: rgba(0,0,0,.25)
 
 
-/* GRID
- * */
+// -- GRID
+/////////////////////////////////////////////////////////
 
-// DEFAULT 940px GRID
+// __ DEFAULT 940px GRID
+//*******************************************************
+
 $gridColumns: 12
 $gridColumnWidth: 60px
 $gridGutterWidth: 20px
 $gridRowWidth: ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1))
 
-// 1200px MIN
+
+// __ 1200px MIN
+//*******************************************************
+
 $gridColumnWidth1200: 70px
 $gridGutterWidth1200: 30px
 $gridRowWidth1200: ($gridColumns * $gridColumnWidth1200) + ($gridGutterWidth1200 * ($gridColumns - 1))
 
-// 768px-979px
+
+// __ 768px-979px
+//*******************************************************
+
 $gridColumnWidth768: 42px
 $gridGutterWidth768: 20px
 $gridRowWidth768: ($gridColumns * $gridColumnWidth768) + ($gridGutterWidth768 * ($gridColumns - 1))
 
-// FLUID GRID
+
+// __ FLUID GRID
+//*******************************************************
+
 $fluidGridColumnWidth: percentage($gridColumnWidth/$gridRowWidth)
 $fluidGridGutterWidth: percentage($gridGutterWidth/$gridRowWidth)
 
-// 1200px min
+
+// __ 1200px MIN
+//*******************************************************
+
 $fluidGridColumnWidth1200: percentage($gridColumnWidth1200/$gridRowWidth1200)
 $fluidGridGutterWidth1200: percentage($gridGutterWidth1200/$gridRowWidth1200)
 
-// 768px-979px
+
+// __ 768px-979px
+//*******************************************************
+
 $fluidGridColumnWidth768: percentage($gridColumnWidth768/$gridRowWidth768)
 $fluidGridGutterWidth768: percentage($gridGutterWidth768/$gridRowWidth768)
 
 
-/**
- * FUNCTIONS
- * Instead of outputting lines of Sass the way mixins do, functions return a value
- */
-//@import "functions/**/*"
+/////////////////////////////////////////////////////////
+// # FUNCTIONS
+// Functions are like Mixins, but return a value
+/////////////////////////////////////////////////////////
+
+@import "functions/**/*"
 
 
-/**
- * MIXINS
- * Mixins are the Sass equivalent of macros in other programming languages
- */
-//@import "mixins/**/*"
+/////////////////////////////////////////////////////////
+// # MIXINS
+// Mixins are the Sass equivalent of macros
+/////////////////////////////////////////////////////////
+
+@import "mixins/**/*"

@@ -7,38 +7,31 @@ gem 'rake'
 gem 'fileutils'
 gem 'os'
 
-# SASS compiling
+# Sass compiling
 gem 'compass'
-gem 'bootstrap-sass'
 gem 'compass-validator'
-#gem 'sass'
+gem 'bootstrap-sass'
 gem 'sass-globbing'
 
 # 3rd-party libs
 gem 'bourbon'
 
-# Coffee-Script compiling
-gem 'therubyracer', :require => 'v8'
-gem 'coffee-script'
-
 # Images & CSS/JS optimizers/minifiers
-gem 'smusher', :require => false
-gem 'piet', :require => false
-gem 'reduce'
-
-# Generators/Builders
-gem 'stasis'
-gem 'yajl-ruby'
+gem 'piet'
 
 # Utilities
 gem 'colorize'
 
 # Filesystem event listeners
-gem 'rb-inotify', :require => false
-gem 'rb-fsevent', :require => false
-gem 'rb-fchange', :require => false
+gem 'rb-fsevent'
 
-# Server/LiveReload
-#gem 'guard'
+# Guard
+gem 'guard'
+
+gem 'guard-compass'
+gem 'guard-coffeescript'
+gem 'guard-erb'
+gem 'guard-jammit'
+
 gem 'guard-livereload'
-gem 'serve'
+gem 'guard-webrick'

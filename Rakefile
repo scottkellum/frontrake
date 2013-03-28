@@ -1,16 +1,8 @@
 require 'fileutils'
 require 'colorize'
 
-require 'os'
-if OS.windows?
-	require 'rb-fchange'
-elsif OS.osx?
-	require 'rb-fsevent'
-	require 'piet'
-elsif OS.posix?
-	require 'rb-inotify'
-	require 'piet'
-end
+require 'rb-fsevent'
+require 'piet'
 
 
 task :default => [:server]

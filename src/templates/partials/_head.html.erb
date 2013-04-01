@@ -6,7 +6,7 @@
 	site_title = "frontrake"
 	site_lang = "en"
 
-	base_url = "http://127.0.0.1:8000/"
+	base_url = "http://127.0.0.1:8008/"
 	base_domain = "frontrake.dev"
 
 
@@ -28,7 +28,7 @@
 <link href="/assets/icons/favicon.png" rel="icon" type="image/png">
 <!-- JS -->
 <script src="/assets/js/libs/conditionizr-2.2.0.min.js"></script>
-<script src="/assets/js/libs/head.core-0.99.min.js" async></script>
+<script src="/assets/js/libs/head.core-0.99.min.js"></script>
 <script src="/assets/js/libs/jquery-1.9.1.min.js"></script>
 <script>
 conditionizr({
@@ -46,7 +46,7 @@ conditionizr({
 	ie10: { customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
 	ie9: { styles: true, customScript: '/assets/js/libs/prefixfree-1.0.7.min.js' },
 	ie8: { customScript: '/assets/js/plugins/jquery.extended-selectors-1.0.0.min.js, /assets/js/libs/selectivizr-1.0.3b.min.js' },
-	retina: { classes: true, customScript: '/assets/js/libs/retina-0.0.2.min.js' },
+	retina: { classes: true, customScript: '/assets/js/plugins/jquery.retinise-1.0.min.js' },
 	touch: { classes: true },
 	mac: true, win: true, linux: true
 });

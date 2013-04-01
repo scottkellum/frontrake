@@ -4,3 +4,9 @@ jQuery ->
 
 	# fire jKit
 	$('body').jKit()
+
+	# retinise
+	if ($('body').hasClass('retina'))
+		$('.retina').retinise({
+			altattr: "alt"
+		})

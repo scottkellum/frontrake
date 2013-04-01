@@ -5,8 +5,8 @@
 .sass-cache
 
 # build output dir
-dist/
-.dist_tmp
+public/
+.public/
 
 # backup/package dir
 packs/

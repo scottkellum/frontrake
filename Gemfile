@@ -5,7 +5,6 @@ ruby '1.9.3'
 # rake gem required to run tasks
 gem 'rake'
 gem 'fileutils'
-gem 'os'
 
 # Sass compiling
 gem 'compass'

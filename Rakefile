@@ -56,22 +56,6 @@ task :optimize do
 	Rake::Task['optimize_js'].invoke
 end
 
-# VALIDATE
-# validates the generated CSS (W3C)
-desc "validates the generated CSS (W3C)"
-task :validate do
-	if Dir.exists? "public"
-		public_dir = true
-	end
-
-	system("compass validate")
-
-	FileUtils.rm_rf ".sass-cache"
-	if !public_dir
-		FileUtils.rm_rf "public"
-	end
-end
-
 # BUILD
 # builds the project files
 desc "builds the project files"

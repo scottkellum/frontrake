@@ -9,7 +9,6 @@ gem 'os'
 
 # Sass compiling
 gem 'compass'
-gem 'compass-validator'
 gem 'bootstrap-sass'
 gem 'sass-globbing'
 

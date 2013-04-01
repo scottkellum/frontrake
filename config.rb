@@ -1,7 +1,5 @@
 # Require any additional compass plugins here.
 require 'bootstrap-sass'
-
-require 'compass-validator'
 require 'sass-globbing'
 
 # Project configuration

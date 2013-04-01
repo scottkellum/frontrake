@@ -89,7 +89,7 @@ task :pack do
 		system("tar -zcf packs/#{date}.tar.gz public")
 		puts "Created archive at packs/#{date}.tar.gz".colorize( :color => :green )
 	else
-		puts "Not created. Dist directory doesn't exist...".colorize( :color => :yellow )
+		puts "Not created. Public directory doesn't exist...".colorize( :color => :yellow )
 	end
 end
 

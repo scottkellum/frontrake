@@ -18,7 +18,6 @@ desc "initalizes the 3rd-party libraries"
 task :init do
 	Dir.chdir "src/assets/sass/libs"
 	system("bourbon install")
-	#puts "Initialized 3rd-party libraries..."
 end
 
 # UPDATE
@@ -27,15 +26,14 @@ desc "updates the 3rd-party libraries"
 task :update do
 	Dir.chdir "src/assets/sass/libs"
 	system("bourbon update")
-	#puts "Updated 3rd-party libraries..."
 end
 
 # REMOVE
 # removes all non-source files
 desc "removes all non-source files"
 task :remove do
-	FileUtils.rm_rf "dist"
-	FileUtils.rm_rf ".dist_tmp"
+	FileUtils.rm_rf "public"
+	FileUtils.rm_rf ".public"
 	FileUtils.rm_rf ".sass-cache"
 	puts "Removed non-source files from project...".colorize( :color => :green )
 end
@@ -62,15 +60,15 @@ end
 # validates the generated CSS (W3C)
 desc "validates the generated CSS (W3C)"
 task :validate do
-	if Dir.exists? "dist"
-		dist = true
+	if Dir.exists? "public"
+		public_dir = true
 	end
 
 	system("compass validate")
 
 	FileUtils.rm_rf ".sass-cache"
-	if !dist
-		FileUtils.rm_rf "dist"
+	if !public_dir
+		FileUtils.rm_rf "public"
 	end
 end
 
@@ -85,25 +83,13 @@ task :build do
 	Rake::Task['clean'].invoke
 end
 
-# WATCH
-# watches for changes and fires compile()
-desc "watches for changes and fires compile()"
-task :watch do
-	puts "Watching source files for changes...".colorize( :color => :light_blue )
-
-	if OS.windows?
-		Rake::Task['watch_windows'].invoke
-	elsif OS.osx?
-		Rake::Task['watch_osx'].invoke
-	elsif OS.posix?
-		Rake::Task['watch_linux'].invoke
-	end
-end
-
 # SERVER
 # runs a local webserver and watches for changes
 desc "runs a local webserver and watches for changes"
-multitask :server => [ :watch, :serve, :guard ]
+task :server do
+	puts "Watching source files for changes...".colorize( :color => :light_blue )
+	system("guard start")
+end
 
 # PACK
 # packages the current build
@@ -236,74 +222,4 @@ task :optimize_js do
 		system("reduce -o #{file}")
 	end
 	puts "Optimized/minified JS assets...".colorize( :color => :green )
-end
-
-
-# WATCH
-################################################################################################
-
-# WATCH-WINDOWS
-# watches for changes on windows plattforms
-task :watch_windows do
-	notifier = FChange::Notifier.new
-
-  	notifier.watch("src/assets/sass", :all_events, :recursive) do |event|
-  		puts "Detected change inside: src/assets/sass".colorize( :color => :yellow )
-    	Rake::Task['compile_css'].execute
-  	end
-  	notifier.watch("src/assets/js", :all_events, :recursive) do |event|
-  		puts "Detected change inside: src/assets/js".colorize( :color => :yellow )
-    	Rake::Task['compile_js'].execute
-  	end
-  	notifier.watch("src/templates", :all_events, :recursive) do |event|
-  		puts "Detected change inside: src/templates".colorize( :color => :yellow )
-    	Rake::Task['compile_html'].execute
-  	end
-
-  	Signal.trap('INT') do
-	    notifier.stop
-	end
-
-  	notifier.run
-end
-
-# WATCH-OSX
-# watches for changes on osx plattforms
-task :watch_osx do
-	paths = ['src/assets/sass', 'src/assets/js', 'src/templates']
-	options = { :latency => 0.75, :no_defer => true }
-
-	notifier = FSEvent.new
-	notifier.watch paths, options do |directories|
-		puts "Detected change inside: #{directories.inspect}".colorize( :color => :yellow )
-		dir = directories.inspect.to_s
-
-		if dir.include? 'src/assets/sass'
-			Rake::Task['compile_css'].execute
-		elsif dir.include? 'src/assets/js'
-			Rake::Task['compile_js'].execute
-		elsif dir.include? 'src/templates'
-			Rake::Task['compile_html'].execute
-		end
-	end
-
-	notifier.run
-end
-
-# WATCH-LINUX
-# watches for changes on linux plattforms
-task :watch_linux do
-	notifier = INotify::Notifier.new
-
-	notifier.watch("src/assets/sass", :modify, :moved_to, :create, :delete)
-		puts "Detected change inside: src/assets/sass".colorize( :color => :yellow )
-		Rake::Task['compile_css'].execute
-	notifier.watch("src/assets/js", :modify, :moved_to, :create, :delete)
-		puts "Detected change inside: src/assets/js".colorize( :color => :yellow )
-		Rake::Task['compile_js'].execute
-	notifier.watch("src/templates", :modify, :moved_to, :create, :delete)
-		puts "Detected change inside: src/templates".colorize( :color => :yellow )
-		Rake::Task['compile_html'].execute
-
-	notifier.run
 end

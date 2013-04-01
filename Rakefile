@@ -72,7 +72,7 @@ end
 desc "runs a local webserver and watches for changes"
 task :server do
 	Rake::Task['build'].invoke
-	system("guard start")
+	system("guard start --no-bundler-warning")
 end
 
 # PACK
@@ -118,26 +118,6 @@ task :create do
 	FileUtils.cp_r files, "public"
 	FileUtils.cp "src/.htaccess", "public/.htaccess"
 	puts "Created build directory...".colorize( :color => :green )
-end
-
-# SERVE
-# starts the serve server
-task :serve do
-	Rake::Task['build'].invoke
-	puts "Starting Serve web server...".colorize( :color => :light_blue )
-	puts "\n"
-	puts "####################################################".colorize( :background => :light_blue )
-	puts "  Serve can be access via: http://127.0.0.1:8000    ".colorize( :background => :light_blue )
-	puts "####################################################".colorize( :background => :light_blue )
-	puts "\n"
-	%x{serve 8000 dist}
-end
-
-# GUARD
-# starts Guards (LiveReload)
-task :guard do
-	puts "Starting Guard LiveReload....".colorize( :color => :light_blue )
-	%x{guard start --no-bundler-warning}
 end
 
 

@@ -16,6 +16,7 @@ gem 'sass-globbing'
 gem 'bourbon'
 
 # Images & CSS/JS optimizers/minifiers
+gem 'reduce'
 gem 'piet'
 
 # Utilities

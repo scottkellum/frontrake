@@ -71,7 +71,7 @@ end
 # runs a local webserver and watches for changes
 desc "runs a local webserver and watches for changes"
 task :server do
-	puts "Watching source files for changes...".colorize( :color => :light_blue )
+	Rake::Task['build'].invoke
 	system("guard start")
 end
 
@@ -82,11 +82,11 @@ task :pack do
 	date = Time.now
 	date = date.strftime("%Y-%m-%d_%H-%M")
 
-	if File.directory? "dist"
+	if File.directory? "public"
 		unless File.directory? "packs"
 			FileUtils.mkdir "packs"
 		end
-		system("tar -zcf packs/#{date}.tar.gz dist")
+		system("tar -zcf packs/#{date}.tar.gz public")
 		puts "Created archive at packs/#{date}.tar.gz".colorize( :color => :green )
 	else
 		puts "Not created. Dist directory doesn't exist...".colorize( :color => :yellow )
@@ -101,10 +101,12 @@ end
 # CLEAN
 # cleans the dist directory
 task :clean do
-	FileUtils.rm_rf "dist/.git"
-	FileUtils.rm_rf "dist/.sass-cache"
-	FileUtils.rm_rf "dist/assets/sass"
-	FileUtils.rm_rf "dist/templates"
+	FileUtils.rm_rf "public/.git"
+	FileUtils.rm_rf "public/.sass-cache"
+	FileUtils.rm_rf "public/assets/sass"
+	FileUtils.rm_rf "public/templates"
+	FileUtils.rm_rf ".public"
+	FileUtils.rm_rf ".sass-cache"
 	puts "Cleaned build directory...".colorize( :color => :green )
 end
 
@@ -112,9 +114,9 @@ end
 # creates the dist dir by copying src
 task :create do
 	files = Dir.glob("src/*")
-	FileUtils.mkdir "dist"
-	FileUtils.cp_r files, "dist"
-	FileUtils.cp "src/.htaccess", "dist/.htaccess"
+	FileUtils.mkdir "public"
+	FileUtils.cp_r files, "public"
+	FileUtils.cp "src/.htaccess", "public/.htaccess"
 	puts "Created build directory...".colorize( :color => :green )
 end
 
@@ -145,17 +147,17 @@ end
 # COMPILE-CSS
 # compiles sass files with compass
 task :compile_css do
-	%x{compass compile}
+	system("compass compile")
 	puts "Compiled Sass to CSS...".colorize( :color => :green )
 end
 
 # COMPILE-HTML
-# compiles HAML to HTML
+# compiles ERB to HTML
 task :compile_html do
-	%x{stasis -p .dist_tmp -o src/templates}
-	FileList['.dist_tmp/src/templates/**/*.html'].exclude('.dist_tmp/src/templates/partials/**/_*.html').each do |file|
+	%x{stasis -p .public -o src/templates}
+	FileList['.public/src/templates/**/*.html'].exclude('.public/src/templates/partials/**/_*.html').each do |file|
 		src = file
-		out = file.sub(/.dist_tmp\/src\/templates/, 'dist')
+		out = file.sub(/.public\/src\/templates/, 'public')
 		if File.exist? out
 			FileUtils.rm out
 		end
@@ -167,9 +169,9 @@ end
 # COMPILE-JS
 # compiles coffee-script to JS
 task :compile_js do
-	%x{stasis -p .dist_tmp -o src/assets/js}
-	FileUtils.rm_rf "dist/assets/js"
-	FileUtils.cp_r ".dist_tmp/src/assets/js", "dist/assets"
+	%x{stasis -p .public -o src/assets/js}
+	FileUtils.rm_rf "public/assets/js"
+	FileUtils.cp_r ".public/src/assets/js", "public/assets"
 	puts "Compiled Coffee-Script to JS...".colorize( :color => :green )
 end
 
@@ -180,7 +182,7 @@ end
 # OPTIMIZE-CSS
 # minifies CSS files
 task :optimize_css do
-	FileList['dist/assets/css/**/*.css'].exclude('dist/assets/css/**/*.min.css').each do |file|
+	FileList['public/assets/css/**/*.css'].exclude('public/assets/css/**/*.min.css').each do |file|
 		system("reduce -o #{file}")
 	end
 	puts "Optimized/minified CSS assets...".colorize( :color => :green )
@@ -189,12 +191,8 @@ end
 # OPTIMIZE-IMG
 # shrinks image files
 task :optimize_img do
-	FileList['dist/img/*'].each do |img|
-		if OS.windows?
-			system("smusher dist/img")
-		else
-			Piet.optimize(img)
-		end
+	FileList['public/img/*'].each do |img|
+		Piet.optimize(img)
 	end
 	puts "Optimized images....".colorize( :color => :green )
 end
@@ -202,7 +200,7 @@ end
 # OPTIMIZE-JS
 # minifies JS files
 task :optimize_js do
-	FileList['dist/assets/js/**/*.js'].exclude('dist/assets/js/**/*.min.js').each do |file|
+	FileList['public/assets/js/**/*.js'].exclude('public/assets/js/**/*.min.js').each do |file|
 		system("reduce -o #{file}")
 	end
 	puts "Optimized/minified JS assets...".colorize( :color => :green )

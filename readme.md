@@ -18,7 +18,7 @@ Features can be splitted into two divisions: One for the framework & one for the
   write better JS with `coffee-script`
 - **SASS/SCSS Support**    
   `frontrake` is built upon `Compass` and therefor fully compatible with `SASS`
-- **HAML Support**    
+- **ERB Support**    
   we use pre-processors for CSS & JS - let's use one for HTML as well
 - **Rake Powered**    
   everything can be run through `Rake` tasks, making it stupid easy to get started
@@ -30,8 +30,8 @@ Features can be splitted into two divisions: One for the framework & one for the
   reloads the browser every time a (source) file has changed
 - **Server**    
   built-in web server for painless developing
-- **Watch**    
-  watches the directory for changes and compiles on event
+- **Guard**    
+  filesystem change events are powered by `Guard`
 
 
 ## Install
@@ -39,21 +39,6 @@ Features can be splitted into two divisions: One for the framework & one for the
 Installation is easy. Clone the repository, `cd` to it's location and run:
 
     sudo bundle install
-
-You might also need to install those packages (before):
-    
-    # OSX (Homebrew)
-    brew install imagemagick optipng jpegoptim readline zlib
-    
-    # Debian
-    apt-get install imagemagick optipng jpegoptim readline zlib
-    
-    # CentOS
-    yum install ImageMagick optipng readline zlib
-    compile jpegoptim from source (https://github.com/tjko/jpegoptim)
-    
-    # Windows
-    cygwin -> ImageMagick readline zlib
 
 ## Tasks
 
@@ -67,7 +52,6 @@ To get a list of all available tasks, run `rake -T`:
     rake remove    # removes all non-source files
     rake server    # runs a local webserver and watches for changes
     rake update    # updates the 3rd-party libraries
-    rake watch     # watches for changes and fires compile()
 
 ## Structure
 
@@ -80,5 +64,5 @@ For the moment you have to stick with _my_ folder structure, e.g. it's basics:
     ------ /js - coffee-script/js root
     ---- /templates - HAML/HTML root
     
-    -- /dist - output directory
+    -- /public - output directory
     -- /packs - archive/backup directory

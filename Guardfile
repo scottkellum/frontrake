@@ -19,16 +19,20 @@ guard 'webrick', :host => '127.0.0.1', :port => '8008', :docroot => 'public' do
 end
 
 # guard-livereload
-guard 'livereload', :grace_period => 0.75 do
+guard 'livereload', :grace_period => 0.25 do
 	watch(%r{^public/assets/css/(.+\.css)$})
+	watch(%r{^public/(.+\.html)$})
 	watch(%r{^public/assets/js/(.+\.js)$})
+	watch(%r{^public/img/(.+\.png)$})
+	watch(%r{^public/img/(.+\.gif)$})
+	watch(%r{^public/img/(.+\.jpg)$})
 end
 
 # guard-shell
 guard 'shell' do
 	watch(%r{^src/templates/(.+\.erb)$}) { |m|
-		`stasis -o #{m[0]} -p .public`
+		`stasis -o src/templates -p .public`
 		`cp .public/src/templates/*.html public/`
+		`echo #{m[0]} updated`
 	}
-	#watch(/(.*).txt/) { |m| `tail #{m[0]}` }
 end

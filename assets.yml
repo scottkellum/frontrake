@@ -8,3 +8,6 @@ javascripts:
     - src/assets/js/libs/conditionizr-2.2.0.min.js
     - src/assets/js/libs/head.core-0.99.min.js
     - src/assets/js/libs/jquery-1.9.1.min.js
+   ie8:
+   	- src/assets/js/plugins/jquery.extended-selectors-1.0.0.min.js
+   	- src/assets/js/libs/selectivizr-1.0.3b.min.js

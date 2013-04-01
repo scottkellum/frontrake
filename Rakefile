@@ -72,7 +72,7 @@ end
 desc "runs a local webserver and watches for changes"
 task :server do
 	Rake::Task['build'].invoke
-	system("guard start --no-bundler-warning")
+	system("guard start --no-bundler-warning --notify false")
 end
 
 # PACK

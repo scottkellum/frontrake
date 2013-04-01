@@ -38,3 +38,5 @@ gem 'guard-livereload'
 gem 'guard-webrick'
 
 gem 'guard-shell'
+
+gem 'terminal-notifier-guard'

@@ -36,3 +36,9 @@ guard 'shell' do
 		`echo #{m[0]} updated`
 	}
 end
+
+guard :shell do
+	watch(%r{^public/(.+\.*)$}) { |m|
+		`terminal-notifier-success -title "frontrake" -subtitle "Guard Notification" -message "#{m[0]} has changed"`
+	}
+end

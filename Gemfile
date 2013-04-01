@@ -24,7 +24,6 @@ gem 'colorize'
 
 # Filesystem event listeners
 gem 'rb-fsevent'
-gem 'growl'
 
 # Erb compiling
 gem 'stasis'
@@ -40,3 +39,5 @@ gem 'guard-livereload'
 gem 'guard-webrick'
 
 gem 'guard-shell'
+
+gem 'terminal-notifier-guard'

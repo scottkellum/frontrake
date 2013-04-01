@@ -16,8 +16,8 @@ Features can be splitted into two divisions: One for the framework & one for the
 
 - **Coffee-Script Support**    
   write better JS with `coffee-script`
-- **SASS/SCSS Support**    
-  `frontrake` is built upon `Compass` and therefor fully compatible with `SASS`
+- **Sass/SCSS Support**    
+  `frontrake` is built upon `Compass` and therefor fully compatible with `Sass`
 - **ERB Support**    
   we use pre-processors for CSS & JS - let's use one for HTML as well
 - **Rake Powered**    
@@ -60,7 +60,7 @@ For the moment you have to stick with _my_ folder structure, e.g. it's basics:
     / - project root
     -- /src - source root
     ---- /assets - assets directory
-    ------ /sass - SASS/CSS root
+    ------ /sass - Sass/CSS root
     ------ /js - coffee-script/js root
     ---- /templates - HAML/HTML root
     

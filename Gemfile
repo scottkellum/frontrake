@@ -24,6 +24,7 @@ gem 'colorize'
 
 # Filesystem event listeners
 gem 'rb-fsevent'
+gem 'growl'
 
 # Erb compiling
 gem 'stasis'

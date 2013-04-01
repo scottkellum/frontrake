@@ -6,27 +6,29 @@ guard 'compass' do
 end
 
 # guard-coffeescript
-guard 'coffeescript', :input => 'src/assets/js', :output => 'dist/assets/js'
-
-# guard-erb
-guard 'erb', :input => 'src/templates/index.html.erb', :output => "dist/index.html" do
-	watch (%r{src/templates/index.html.erb})
-end
-
+guard 'coffeescript', :input => 'src/assets/js', :output => 'public/assets/js'
 
 # guard-jammit
 guard :jammit, :config_path => 'assets.yml' do
-	watch(%r{^dist/assets/css/(.*)\.css$})
-	watch(%r{^dist/assets/js/(.*)\.js$})
+	watch(%r{^public/assets/css/(.*)\.css$})
+	watch(%r{^public/assets/js/(.*)\.js$})
 end
 
-
 # guard-webrick
-guard 'webrick', :host => '127.0.0.1', :port => '8008', :docroot => 'dist' do
+guard 'webrick', :host => '127.0.0.1', :port => '8008', :docroot => 'public' do
 end
 
 # guard-livereload
 guard 'livereload', :grace_period => 0.75 do
-	watch(%r{^dist/assets/css/(.+\.css)$})
-	watch(%r{^dist/assets/js/(.+\.js)$})
+	watch(%r{^public/assets/css/(.+\.css)$})
+	watch(%r{^public/assets/js/(.+\.js)$})
+end
+
+# guard-shell
+guard 'shell' do
+	watch(%r{^src/templates/(.+\.erb)$}) { |m|
+		`stasis -o #{m[0]} -p .public`
+		`cp .public/src/templates/*.html public/`
+	}
+	#watch(/(.*).txt/) { |m| `tail #{m[0]}` }
 end

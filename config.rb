@@ -12,11 +12,11 @@ environment = :production
 # Set this to the root of your project when deployed:
 http_path = "/"
 
-css_dir = "dist/assets/css"
+css_dir = "public/assets/css"
 sass_dir = "src/assets/sass"
 
 images_dir = "src/img"
-generated_images_dir = "dist/img"
+generated_images_dir = "public/img"
 
 javascripts_dir = "src/assets/js"
 fonts_dir = "src/assets/fonts"

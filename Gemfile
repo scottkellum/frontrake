@@ -25,13 +25,17 @@ gem 'colorize'
 # Filesystem event listeners
 gem 'rb-fsevent'
 
+# Erb compiling
+gem 'stasis'
+
 # Guard
 gem 'guard'
 
 gem 'guard-compass'
 gem 'guard-coffeescript'
-gem 'guard-erb'
 gem 'guard-jammit'
 
 gem 'guard-livereload'
 gem 'guard-webrick'
+
+gem 'guard-shell'
